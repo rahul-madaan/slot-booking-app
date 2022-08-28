@@ -1,10 +1,14 @@
 import React from 'react'
 
-export const SlotButton = () => {
+export const SlotButton = (props) => {
+
+    const myBuyingRequestButtonClick = (e) => {
+        e.preventDefault()
+        console.log("INDEX = " + e.target.getAttribute('data-value-index') + props.data)
+    }
     return (
         <>
-            <button className="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
-                    type="button" role="tab">Check Owner
+            <button type="button" className="btn btn-outline-danger" onClick={myBuyingRequestButtonClick}>Check Owner
             </button>
         </>
     )
