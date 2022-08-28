@@ -6,7 +6,7 @@ function App() {
     <div className="App">
         <p>My App Works</p>
         {timeSlot.map((SlotName,index) => (
-        <SlotButton value={SlotName.toString()} key={index} />
+        <SlotButton value={SlotName.toString()} key={index} value2={index} />
         )
         )}
     </div>
