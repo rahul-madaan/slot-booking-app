@@ -1,6 +1,7 @@
-import {useLayoutEffect} from "react";
+import {useLayoutEffect, useState} from "react";
 import axios from "axios";
 export const SlotButton = (props) => {
+    const [slotAvailabilityArray, setSlotAvailabilityArray] = useState([])
 
     const myBuyingRequestButtonClick = (e) => {
         e.preventDefault()
@@ -9,13 +10,13 @@ export const SlotButton = (props) => {
 
     const fetchSlotAvailability = () => {
         axios.get("http://localhost:8000/").then((result)=>{
-            console.log("Fetched Data = " + result.data)
+            console.log("Fetched Data = " + result.data.message)
         })
     }
 
     useLayoutEffect(() => {
         fetchSlotAvailability()
-    }, [""]);
+    }, []);
 
     return (
         <>
