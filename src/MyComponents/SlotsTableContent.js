@@ -11,7 +11,7 @@ export const SlotsTableContent = (props) => {
                 <th>{props.index +1}</th>
                 <td>Selected days</td>
                 <td>{props.timeSlots}</td>
-                <td>{slotAvailabilityArray[props.index]}</td>
+                <td>{props.availableSlotCount}</td>
                 <td><SlotButton value={props.timeSlots} key={props.index} value2={props.index} /></td>
             </tr>
         </>

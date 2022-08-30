@@ -1,4 +1,3 @@
-import {SlotButton} from "./SlotButton";
 import axios from "axios";
 import {useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
@@ -28,7 +27,7 @@ export const SlotsTable = (props) => {
                 </thead>
                 <tbody>
                 {props.timeSlots.map((timeslots,index) => {
-                    return <SlotsTableContent timeSlots={timeslots} index={index}/>
+                    return <SlotsTableContent timeSlots={timeslots} index={index} availableSlotCount={slotAvailabilityArray[index]}/>
                 })}
                 </tbody>
             </table>
