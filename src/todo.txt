@@ -1,1 +1,1 @@
-make table like phoneOne for available slots and book slots.
+fetch mock slots data from backend api and populate array in slotstable.js file
