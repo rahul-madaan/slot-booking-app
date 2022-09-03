@@ -1,6 +1,4 @@
 import {SlotButton} from "./SlotButton";
-import axios from "axios";
-import {useState} from "react";
 
 
 export const SlotsTableContent = (props) => {

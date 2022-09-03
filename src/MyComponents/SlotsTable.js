@@ -1,17 +1,22 @@
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
 
 
 export const SlotsTable = (props) => {
-
     const [slotAvailabilityArray, setSlotAvailabilityArray] = useState([1,2,3,1,2,3,1,2])
 
     const fetchSlotAvailability = () => {
         axios.get("http://localhost:8000/").then((result)=>{
-            console.log("Fetched Data = " + result.data.message)
+            console.log("Fetched Data = " + result.data.availableSlots)
+            setSlotAvailabilityArray(result.data.availableSlots)
         })
     }
+
+    useEffect(() => {
+        fetchSlotAvailability()
+    }, []);
+
 
     return (
         <>

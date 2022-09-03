@@ -1,1 +1,2 @@
-fetch mock slots data from backend api and populate array in slotstable.js file
+test fast api server with database
+test fast api server with .env hidden secrets
