@@ -1,2 +1,1 @@
-test fast api server with database
-test fast api server with .env hidden secrets
+make another table to reserve slot
