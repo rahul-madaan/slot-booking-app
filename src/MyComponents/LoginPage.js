@@ -1,9 +1,28 @@
 import React from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export const LoginPage = (props) => {
+    let navigate = useNavigate();
+    const routeChange = (path) => {
+        navigate(path);
+    }
 
     const loginSubmit = (e) => {
         e.preventDefault()
+        axios.post("http://localhost:8000/api/v1/login", {
+            'email_ID': props.userSNUID,
+            'password': props.loginOTP
+        }).then((result) => {
+            if (result.data.statusCode === 0) {
+                props.setUserSNUID(props.userSNUID)
+                routeChange('/book-slot')
+            } else if (result.data.statusCode === 1) {
+                console.log("Passwords do not match")
+            } else if (result.data.statusCode === 2) {
+                console.log("USER NOT REGISTERED")
+            }
+        })
     }
 
 
@@ -12,8 +31,8 @@ export const LoginPage = (props) => {
             <form onSubmit={loginSubmit}>
                 <div className="mb-3">
                     <label  className="form-label">Enter SNU ID</label>
-                    <input type="number" value={props.userSNUID} onChange={(e) => {
-                        props.userSNUID(e.target.value)
+                    <input type="text" value={props.userSNUID} onChange={(e) => {
+                        props.setUserSNUID(e.target.value)
                     }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                 </div>
                 <div className="mb-3">
