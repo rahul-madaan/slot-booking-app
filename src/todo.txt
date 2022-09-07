@@ -1,3 +1,2 @@
-look into book-slot-page load issue
 save login info in local storage
 react app integrate APIs, book button
