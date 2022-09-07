@@ -10,7 +10,7 @@ export const LoginPage = (props) => {
 
     const loginSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:8000/api/v1/login", {
+        axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/login", {
             'email_ID': props.userSNUID,
             'password': props.loginOTP
         }).then((result) => {
