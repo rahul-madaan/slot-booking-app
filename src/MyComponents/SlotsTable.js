@@ -7,7 +7,7 @@ export const SlotsTable = (props) => {
     const [slotAvailabilityArray, setSlotAvailabilityArray] = useState([1,2,3,1,2,3,1,2])
 
     const fetchSlotAvailability = () => {
-        axios.get("http://localhost:8000/api/v1/").then((result)=>{
+        axios.get(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/").then((result)=>{
             console.log("Fetched Data = " + result.data.availableSlots)
             setSlotAvailabilityArray(result.data.availableSlots)
         })
