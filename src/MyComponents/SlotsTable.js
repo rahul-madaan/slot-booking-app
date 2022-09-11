@@ -7,7 +7,7 @@ export const SlotsTable = (props) => {
     const [slotAvailabilityArray, setSlotAvailabilityArray] = useState([1,2,3,1,2,3,1,2])
 
     const fetchSlotAvailability = () => {
-        axios.get("http://localhost:8000/").then((result)=>{
+        axios.get("http://localhost:8000/api/v1/").then((result)=>{
             console.log("Fetched Data = " + result.data.availableSlots)
             setSlotAvailabilityArray(result.data.availableSlots)
         })
@@ -20,6 +20,18 @@ export const SlotsTable = (props) => {
 
     return (
         <>
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                    <label className="form-check-label" htmlFor="flexRadioDefault1">
+                        Default radio
+                    </label>
+            </div>
+            <div className="form-check">
+                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
+                    <label className="form-check-label" htmlFor="flexRadioDefault2">
+                        Default checked radio
+                    </label>
+            </div>
             <table className="table">
                 <thead>
                 <tr>
