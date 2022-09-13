@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 
@@ -14,13 +13,13 @@ export const SelectDaysPage = (props) => {
 
     const clickMWF = (e) => {
         e.preventDefault()
-        setSelectedDaysCode("MWF")
+        props.setSelectedDaysCode("MWF")
         setSelectedDaysText("Monday, Wednesday, Friday")
     }
 
     const clickTTS = (e) => {
         e.preventDefault()
-        setSelectedDaysCode("TTS")
+        props.setSelectedDaysCode("TTS")
         setSelectedDaysText("Tuesday, Thursday, Saturday")
     }
 
@@ -49,7 +48,7 @@ export const SelectDaysPage = (props) => {
             </div> : null}
 
             <div className="container h-100 d-flex justify-content-center ">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3">Confirm Selection</button>
+                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection}>Confirm Selection</button>
             </div>
 
         </>

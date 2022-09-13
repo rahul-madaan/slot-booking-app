@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
 
 
-export const SlotsTable = (props) => {
+export const SlotsTablePage = (props) => {
     const [slotAvailabilityArray, setSlotAvailabilityArray] = useState([1,2,3,1,2,3,1,2])
 
     const fetchSlotAvailability = () => {
@@ -20,18 +20,6 @@ export const SlotsTable = (props) => {
 
     return (
         <>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                    <label className="form-check-label" htmlFor="flexRadioDefault1">
-                        Default radio
-                    </label>
-            </div>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" />
-                    <label className="form-check-label" htmlFor="flexRadioDefault2">
-                        Default checked radio
-                    </label>
-            </div>
             <table className="table">
                 <thead>
                 <tr>
@@ -44,7 +32,7 @@ export const SlotsTable = (props) => {
                 </thead>
                 <tbody>
                 {props.timeSlots.map((timeslots,index) => {
-                    return <SlotsTableContent timeSlots={timeslots} index={index} availableSlotCount={slotAvailabilityArray[index]}/>
+                    return <SlotsTableContent timeSlots={timeslots} index={index} availableSlotCount={slotAvailabilityArray[index]} selectedDaysCode={props.selectedDaysCode}/>
                 })}
                 </tbody>
             </table>
