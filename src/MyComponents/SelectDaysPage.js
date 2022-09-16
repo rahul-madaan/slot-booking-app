@@ -4,6 +4,7 @@ import {useState} from "react";
 
 export const SelectDaysPage = (props) => {
     const [selectedDaysText, setSelectedDaysText] = useState("")
+    const [confirmSelectionDisabled, setConfirmSelectionButtonDisabled] = useState(true)
 
 
     let navigate = useNavigate();
@@ -14,12 +15,14 @@ export const SelectDaysPage = (props) => {
     const clickMWF = (e) => {
         e.preventDefault()
         props.setSelectedDaysCode("MWF")
+        setConfirmSelectionButtonDisabled(false)
         setSelectedDaysText("Monday, Wednesday, Friday")
     }
 
     const clickTTS = (e) => {
         e.preventDefault()
         props.setSelectedDaysCode("TTS")
+        setConfirmSelectionButtonDisabled(true)
         setSelectedDaysText("Tuesday, Thursday, Saturday")
     }
 
@@ -48,7 +51,7 @@ export const SelectDaysPage = (props) => {
             </div> : null}
 
             <div className="container h-100 d-flex justify-content-center ">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection}>Confirm Selection</button>
+                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={confirmSelectionDisabled}>Confirm Selection</button>
             </div>
 
         </>

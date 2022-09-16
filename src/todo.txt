@@ -1,2 +1,3 @@
 save login info in local storage
 react app integrate APIs, book button
+add flow variable to detect if requested page was by flow or by url, redirect if by url
