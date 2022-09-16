@@ -1,6 +1,8 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState, useEffect} from "react";
+
+import axios from "axios";
 
 export const SelectDaysPage = (props) => {
     const [selectedDaysText, setSelectedDaysText] = useState("")
@@ -31,6 +33,24 @@ export const SelectDaysPage = (props) => {
         e.preventDefault()
         routeChange('/book-slot')
     }
+
+    const verifyLogin = () => {
+        axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/verify-login", {
+            'email_ID': localStorage.getItem("user_emailID"),
+        }).then((result) => {
+            if (result.data.loginSuccess === 0) {
+                routeChange('/login')
+                localStorage.removeItem("user_emailID")
+            } else if (result.data.statusCode === 1) {
+                console.log("Login verified successfully")
+            }
+        })
+    }
+
+
+    useEffect(() => {
+        verifyLogin()
+    }, []);
 
 
     return (<>
