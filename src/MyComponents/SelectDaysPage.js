@@ -47,10 +47,10 @@ export const SelectDaysPage = (props) => {
                 routeChange('/login')
                 localStorage.removeItem("user_emailID")
                 localStorage.removeItem("user_emailID_len")
-            } else if (result.data.statusCode === 1) {
+            } else if (result.data.loginSuccess === 1) {
                 props.setUserSNUID(result.data.user_emailID)
                 console.log(result.data.user_emailID)
-                console.log("Login verified successfully")//print hi nahi ho rahe yeh
+                console.log("Login verified successfully")
             }
         }).catch(error => {
             console.log(error.response)
@@ -83,7 +83,7 @@ export const SelectDaysPage = (props) => {
             <div className="container h-100 d-flex justify-content-center ">
                 <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={confirmSelectionDisabled}>Confirm Selection</button>
             </div>
-
+            <p>{props.userSNUID}</p>
         </>
     )
 }
