@@ -31,7 +31,9 @@ function App() {
                     <Route exact path="/select-days"
                            element={<>
                                <SelectDaysPage selectedDaysCode={selectedDaysCode}
-                                               setSelectedDaysCode={setSelectedDaysCode} /></>}/>
+                                               setSelectedDaysCode={setSelectedDaysCode}
+                                               userSNUID={userSNUID}
+                                               setUserSNUID={setUserSNUID}/></>}/>
 
                     <Route exact path="/" element={<Navigate to="/login"/>}/>
                 </Routes>

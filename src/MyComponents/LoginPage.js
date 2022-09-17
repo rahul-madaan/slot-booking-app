@@ -16,8 +16,9 @@ export const LoginPage = (props) => {
         }).then((result) => {
             if (result.data.statusCode === 0) {
                 props.setUserSNUID(props.userSNUID)
-                routeChange('/select-days')
                 localStorage.setItem("user_emailID",result.data.encrypted_emailID)
+                localStorage.setItem("user_emailID_len",props.userSNUID.length)
+                routeChange('/select-days')
             } else if (result.data.statusCode === 1) {
                 console.log("Passwords do not match")
             } else if (result.data.statusCode === 2) {

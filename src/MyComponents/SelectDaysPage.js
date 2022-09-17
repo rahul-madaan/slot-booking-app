@@ -24,7 +24,7 @@ export const SelectDaysPage = (props) => {
     const clickTTS = (e) => {
         e.preventDefault()
         props.setSelectedDaysCode("TTS")
-        setConfirmSelectionButtonDisabled(true)
+        setConfirmSelectionButtonDisabled(false)
         setSelectedDaysText("Tuesday, Thursday, Saturday")
     }
 
@@ -35,15 +35,25 @@ export const SelectDaysPage = (props) => {
     }
 
     const verifyLogin = () => {
+        console.log("login verify started")
         axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/verify-login", {
-            'email_ID': localStorage.getItem("user_emailID"),
+            'encrypted_email_ID': localStorage.getItem("user_emailID"),
+            'encrypted_email_ID_len': localStorage.getItem("user_emailID_len")
         }).then((result) => {
+            console.log("lol")
+            console.log(result.data.loginSuccess)
             if (result.data.loginSuccess === 0) {
+                console.log("cant verify email, login again")
                 routeChange('/login')
                 localStorage.removeItem("user_emailID")
+                localStorage.removeItem("user_emailID_len")
             } else if (result.data.statusCode === 1) {
-                console.log("Login verified successfully")
+                props.setUserSNUID(result.data.user_emailID)
+                console.log(result.data.user_emailID)
+                console.log("Login verified successfully")//print hi nahi ho rahe yeh
             }
+        }).catch(error => {
+            console.log(error.response)
         })
     }
 
