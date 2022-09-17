@@ -9,8 +9,10 @@ const timeSlots = ["6:00-6:45 AM", "7:00-7:45 AM", "8:00-8:45 AM", "4:00-4:45 PM
 
 function App() {
     const [userSNUID, setUserSNUID] = useState("")
-    const [loginOTP, setLoginOTP] = useState("")
+    const [loginPassword, setLoginPassword] = useState("")
     const [selectedDaysCode, setSelectedDaysCode] = useState("")
+    const [selectedDaysText, setSelectedDaysText] = useState("")
+    const [confirmSelectionDisabled, setConfirmSelectionButtonDisabled] = useState(true)
 
 
     return (
@@ -21,19 +23,30 @@ function App() {
                            element={<>
                                <LoginPage userSNUID={userSNUID}
                                           setUserSNUID={setUserSNUID}
-                                          loginOTP={loginOTP}
-                                          setLoginOTP={setLoginOTP}/></>}/>
+                                          loginPassword={loginPassword}
+                                          setLoginPassword={setLoginPassword}/></>}/>
 
                     <Route exact path="/book-slot"
                            element={<><h3>Select Your Gym Slot</h3>
-                               <SlotsTablePage timeSlots={timeSlots} selectedDaysCode={selectedDaysCode}/></>}/>
+                               <SlotsTablePage timeSlots={timeSlots}
+                                               userSNUID={userSNUID}
+                                               setUserSNUID={setUserSNUID}
+                                               selectedDaysText={selectedDaysText}
+                                               setSelectedDaysText={setSelectedDaysText}
+                                               selectedDaysCode={selectedDaysCode}
+                                               setSelectedDaysCode={setSelectedDaysCode}
+                                               setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}/></>}/>
 
                     <Route exact path="/select-days"
                            element={<>
-                               <SelectDaysPage selectedDaysCode={selectedDaysCode}
+                               <SelectDaysPage userSNUID={userSNUID}
+                                               setUserSNUID={setUserSNUID}
+                                               selectedDaysText={selectedDaysText}
+                                               setSelectedDaysText={setSelectedDaysText}
+                                               selectedDaysCode={selectedDaysCode}
                                                setSelectedDaysCode={setSelectedDaysCode}
-                                               userSNUID={userSNUID}
-                                               setUserSNUID={setUserSNUID}/></>}/>
+                                               confirmSelectionDisabled={confirmSelectionDisabled}
+                                               setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}/></>}/>
 
                     <Route exact path="/" element={<Navigate to="/login"/>}/>
                 </Routes>

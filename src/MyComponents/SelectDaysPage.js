@@ -5,9 +5,6 @@ import {useState, useEffect} from "react";
 import axios from "axios";
 
 export const SelectDaysPage = (props) => {
-    const [selectedDaysText, setSelectedDaysText] = useState("")
-    const [confirmSelectionDisabled, setConfirmSelectionButtonDisabled] = useState(true)
-
 
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -17,15 +14,19 @@ export const SelectDaysPage = (props) => {
     const clickMWF = (e) => {
         e.preventDefault()
         props.setSelectedDaysCode("MWF")
-        setConfirmSelectionButtonDisabled(false)
-        setSelectedDaysText("Monday, Wednesday, Friday")
+        props.setConfirmSelectionButtonDisabled(false)
+        props.setSelectedDaysText("Monday, Wednesday, Friday")
+        localStorage.setItem("selected_days_text","Monday, Wednesday, Friday")
+        localStorage.setItem("selected_days_code","MWF")
     }
 
     const clickTTS = (e) => {
         e.preventDefault()
         props.setSelectedDaysCode("TTS")
-        setConfirmSelectionButtonDisabled(false)
-        setSelectedDaysText("Tuesday, Thursday, Saturday")
+        props.setConfirmSelectionButtonDisabled(false)
+        props.setSelectedDaysText("Tuesday, Thursday, Saturday")
+        localStorage.setItem("selected_days_text","Tuesday, Thursday, Saturday")
+        localStorage.setItem("selected_days_code","TTS")
     }
 
 
@@ -76,14 +77,13 @@ export const SelectDaysPage = (props) => {
                 <br/>
             </div>
 
-            {selectedDaysText !== "" ? <div className="container h-100 d-flex justify-content-center ">
-                <h5>Selected days: {selectedDaysText}</h5>
+            {props.selectedDaysText !== "" ? <div className="container h-100 d-flex justify-content-center ">
+                <h5>Selected days: {props.selectedDaysText}</h5>
             </div> : null}
 
             <div className="container h-100 d-flex justify-content-center ">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={confirmSelectionDisabled}>Confirm Selection</button>
+                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={props.confirmSelectionDisabled}>Confirm Selection</button>
             </div>
-            <p>{props.userSNUID}</p>
         </>
     )
 }

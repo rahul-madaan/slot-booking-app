@@ -8,7 +8,7 @@ export const SlotButton = (props) => {
 
     return (
         <>
-            <button type="button" className="btn btn-outline-success" onClick={onButtonClick} data-value-slot-name={props.value} data-value-index-number={props.value2}> Book Slot
+            <button type="button" className="btn btn-outline-success" onClick={onButtonClick} data-value-slot-name={props.value} data-value-index-number={props.value2} disabled={props.availableSlotCount === 0}> Book Slot
             </button>
         </>
     )

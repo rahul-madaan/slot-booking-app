@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export const LoginPage = (props) => {
     let navigate = useNavigate();
@@ -12,7 +13,7 @@ export const LoginPage = (props) => {
         e.preventDefault()
         axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/login", {
             'email_ID': props.userSNUID,
-            'password': props.loginOTP
+            'password': props.loginPassword
         }).then((result) => {
             if (result.data.statusCode === 0) {
                 props.setUserSNUID(props.userSNUID)
@@ -28,6 +29,16 @@ export const LoginPage = (props) => {
     }
 
 
+    const deleteSelectedDays = () => {
+        localStorage.removeItem("selected_days_text")
+        localStorage.removeItem("selected_days_code")
+    }
+
+    useEffect(() => {
+        deleteSelectedDays()
+    }, []);
+
+
     return (
         <div className="mx-5">
             <form onSubmit={loginSubmit}>
@@ -38,9 +49,9 @@ export const LoginPage = (props) => {
                     }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
                 </div>
                 <div className="mb-3">
-                    <label className="form-label">OTP</label>
-                    <input type="password" value={props.loginOTP} onChange={(e) => {
-                        props.setLoginOTP(e.target.value)
+                    <label className="form-label">Password</label>
+                    <input type="password" value={props.loginPassword} onChange={(e) => {
+                        props.setLoginPassword(e.target.value)
                     }} className="form-control"/>
                 </div>
                 <button type="submit" className="btn btn-primary">Log in</button>
