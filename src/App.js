@@ -4,6 +4,7 @@ import {SlotsTablePage} from "./MyComponents/SlotsTablePage";
 import {LoginPage} from "./MyComponents/LoginPage";
 import {useState} from "react";
 import {SelectDaysPage} from "./MyComponents/SelectDaysPage";
+import {MarkAttendancePage} from "./MyComponents/MarkAttendancePage";
 
 const timeSlots = ["6:00-6:45 AM", "7:00-7:45 AM", "8:00-8:45 AM", "4:00-4:45 PM", "5:00-5:45 PM", "6:00-6:45 PM", "7:00-7:45 PM", "8:00-8:45 PM"];
 
@@ -47,6 +48,10 @@ function App() {
                                                setSelectedDaysCode={setSelectedDaysCode}
                                                confirmSelectionDisabled={confirmSelectionDisabled}
                                                setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}/></>}/>
+
+                    <Route exact path="/mark-attendance"
+                           element={<>
+                               <MarkAttendancePage/></>}/>
 
                     <Route exact path="/" element={<Navigate to="/login"/>}/>
                 </Routes>

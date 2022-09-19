@@ -2,3 +2,4 @@ save login info in local storage
 react app integrate APIs, book button
 add flow variable to detect if requested page was by flow or by url, redirect if by url
 add email constraint on login page (allow only snu.edu.in domain email IDs)
+make apge to select what user wants to do, book slot or mark attendance
