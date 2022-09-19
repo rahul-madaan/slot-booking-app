@@ -16,7 +16,6 @@ export const MarkAttendancePage = (props) => {
         navigate(path);
     }
 
-
     const markAttendanceButtonClick = (e) => {
         e.preventDefault()
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -24,7 +23,9 @@ export const MarkAttendancePage = (props) => {
             console.log("Longitude is :", position.coords.longitude);
             setUserLatitude(position.coords.latitude)
             setUserLongitude(position.coords.longitude)
-        });
+        },function (error){
+            console.log(error.message)
+        },{enableHighAccuracy: true, timeout: 50000});
     }
 
 
@@ -37,7 +38,6 @@ export const MarkAttendancePage = (props) => {
                 <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={markAttendanceButtonClick}>Mark Attendance</button>
             </div>
             <p>Latitude: {userLatitude}</p>
-
             <p>Longitude: {userLongitude}</p>
         </>
     )
