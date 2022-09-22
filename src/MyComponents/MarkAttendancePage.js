@@ -61,6 +61,9 @@ export const MarkAttendancePage = (props) => {
 
 
     return (<>
+            <p></p>
+            <br/>
+            <br/>
             <div className="container h-100 d-flex justify-content-center">
                 <h3>Mark your attendance</h3>
             </div>
