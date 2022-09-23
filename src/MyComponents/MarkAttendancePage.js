@@ -9,19 +9,47 @@ import {toast, ToastContainer} from "react-toastify";
 
 export const MarkAttendancePage = (props) => {
 
-    const notify = () => toast('Wow so easy!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
     const [userLatitude, setUserLatitude] = useState(0)
     const [userLongitude, setUserLongitude] = useState(0)
     const [userIPv4, setUserIPv4] = useState(0)
 
+    const notify = () => toast('Attendance marked successfully!', {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+    });
+
+    const verifyLogin = () => {
+        console.log("login verify started")
+        axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/verify-login", {
+            'encrypted_email_ID': localStorage.getItem("user_emailID"),
+            'encrypted_email_ID_len': localStorage.getItem("user_emailID_len")
+        }).then((result) => {
+            console.log("lol")
+            console.log(result.data.loginSuccess)
+            if (result.data.loginSuccess === 0) {
+                console.log("cant verify email, login again")
+                routeChange('/login')
+                localStorage.removeItem("user_emailID")
+                localStorage.removeItem("user_emailID_len")
+            } else if (result.data.loginSuccess === 1) {
+                props.setUserSNUID(result.data.user_emailID)
+                console.log(result.data.user_emailID)
+                console.log("Login verified successfully")
+            }
+        }).catch(error => {
+            console.log(error.response)
+            routeChange('/login')
+        })
+    }
+
+
+    useEffect(() => {
+        verifyLogin()
+    }, []);
 
 
     let navigate = useNavigate();
@@ -75,17 +103,7 @@ export const MarkAttendancePage = (props) => {
             <p>Longitude: {userLongitude}</p>
             <p>IPv4 Address: {userIPv4}</p>
 
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+            <ToastContainer/>
 
         </>
     )

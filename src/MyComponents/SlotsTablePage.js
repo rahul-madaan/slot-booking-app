@@ -39,16 +39,22 @@ export const SlotsTablePage = (props) => {
             }
         }).catch(error => {
             console.log(error.response)
+            routeChange('/login')
         })
     }
 
 
     const updateSelectedDays = () => {
-        props.setSelectedDaysCode(localStorage.getItem("selected_days_code"))
-        props.setSelectedDaysText(localStorage.getItem("selected_days_text"))
-        props.setConfirmSelectionButtonDisabled(false)
+        if(localStorage.getItem("selected_days_code") === null || localStorage.getItem("selected_days_text")=== null) {
+            console.log("days code and text not found in local storage")
+            routeChange('/select-days')
+        }
+        else{
+            props.setSelectedDaysCode(localStorage.getItem("selected_days_code"))
+            props.setSelectedDaysText(localStorage.getItem("selected_days_text"))
+            props.setConfirmSelectionButtonDisabled(false)
+        }
     }
-
 
 
     useEffect(() => {

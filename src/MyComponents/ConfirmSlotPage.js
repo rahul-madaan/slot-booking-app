@@ -4,36 +4,21 @@ import {useState, useEffect} from "react";
 
 import axios from "axios";
 
-export const SelectDaysPage = (props) => {
+export const ConfirmSlotPage = (props) => {
 
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
     }
 
-    const clickMWF = (e) => {
+    const clickYes = (e) => {
         e.preventDefault()
-        props.setSelectedDaysCode("MWF")
-        props.setConfirmSelectionButtonDisabled(false)
-        props.setSelectedDaysText("Monday, Wednesday, Friday")
-        localStorage.setItem("selected_days_text","Monday, Wednesday, Friday")
-        localStorage.setItem("selected_days_code","MWF")
     }
 
-    const clickTTS = (e) => {
+    const clickNo = (e) => {
         e.preventDefault()
-        props.setSelectedDaysCode("TTS")
-        props.setConfirmSelectionButtonDisabled(false)
-        props.setSelectedDaysText("Tuesday, Thursday, Saturday")
-        localStorage.setItem("selected_days_text","Tuesday, Thursday, Saturday")
-        localStorage.setItem("selected_days_code","TTS")
     }
 
-
-    const clickConfirmSelection = (e) => {
-        e.preventDefault()
-        routeChange('/book-slot')
-    }
 
     const verifyLogin = () => {
         console.log("login verify started")
@@ -55,7 +40,6 @@ export const SelectDaysPage = (props) => {
             }
         }).catch(error => {
             console.log(error.response)
-            routeChange('/login')
         })
     }
 
@@ -66,27 +50,16 @@ export const SelectDaysPage = (props) => {
 
 
     return (<>
-            <p></p>
-            <br/>
-            <br/>
             <div className="container h-100 d-flex justify-content-center">
-                <h3>Select Preferred Days</h3>
+                <h3>Confirm Selected Slot</h3>
             </div>
             <div className="container h-100 d-flex justify-content-center">
                 <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-warning my-3" onClick={clickMWF}>M W F</button>
-                    <button type="button" className="btn btn-primary my-3" onClick={clickTTS}>T T S</button>
+                    <button type="button" className="btn btn-success my-3" onClick={clickYes}>   Yes   </button>
+                    <button type="button" className="btn btn-danger my-3" onClick={clickNo}>   No   </button>
                 </div>
                 <br/>
                 <br/>
-            </div>
-
-            {props.selectedDaysText !== "" ? <div className="container h-100 d-flex justify-content-center ">
-                <h5>Selected days: {props.selectedDaysText}</h5>
-            </div> : null}
-
-            <div className="container h-100 d-flex justify-content-center ">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={props.confirmSelectionDisabled}>Confirm Selection</button>
             </div>
         </>
     )
