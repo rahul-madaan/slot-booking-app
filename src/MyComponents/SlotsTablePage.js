@@ -55,14 +55,23 @@ export const SlotsTablePage = (props) => {
         }
     }
 
+    const leaveReservedSlot = () => {
+        axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/leave-reserved-slot", {
+            'email_ID': props.userSNUID,
+        })
+    }
+
 // temporary jugaad hai
     useLayoutEffect(()=>{
-        updateSelectedDays()
+        verifyLogin() // run first
+        updateSelectedDays() // run first
+
     })
 
     useEffect(() => {
-        verifyLogin()
-        fetchSlotAvailability()
+        leaveReservedSlot()  //run second
+        fetchSlotAvailability() //run third
+
     }, []);
 
 
