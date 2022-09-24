@@ -13,7 +13,7 @@ export const SlotsTablePage = (props) => {
     }
 
     const fetchSlotAvailability = () => {
-        axios.get(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/available-slots/" + props.selectedDaysCode).then((result)=>{
+        axios.get(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/available-slots/" + localStorage.getItem("selected_days_code")).then((result)=>{
             console.log("Fetched Data = " + result.data.available_slots)
             setSlotAvailabilityArray(result.data.available_slots)
         })

@@ -1,5 +1,4 @@
-add flow variable to detect if requested page was by flow or by url, redirect if by url
 add email constraint on login page (allow only snu.edu.in domain email IDs)
 time based mark attendance or book slot.
 if we get wifi ssid, then no issue(SSID, IP, Geolocation)
-delete triggers
+print selected slot details from db on confirm slot page

@@ -53,6 +53,7 @@ export const ConfirmSlotPage = (props) => {
             <div className="container h-100 d-flex justify-content-center">
                 <h3>Confirm Selected Slot</h3>
             </div>
+            <h4>your slot details here</h4>
             <div className="container h-100 d-flex justify-content-center">
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button type="button" className="btn btn-success my-3" onClick={clickYes}>   Yes   </button>
