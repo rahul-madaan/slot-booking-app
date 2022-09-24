@@ -44,8 +44,6 @@ function App() {
                                                setSelectedSlotText={setSelectedSlotText}
                                                selectedSlotNumber={selectedSlotNumber}
                                                selectedSlotText={selectedSlotText}
-
-
                                /></>}/>
 
                     <Route exact path="/select-days"
@@ -68,8 +66,14 @@ function App() {
                                <ConfirmSlotPage setUserSNUID={setUserSNUID}
                                                 setSelectedDaysCode={setSelectedDaysCode}
                                                 setSelectedDaysText={setSelectedDaysText}
-                                                setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}
                                                 selectedDaysText={selectedDaysText}
+                                                selectedDaysCode={selectedDaysCode}
+                                                setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}
+                                                setSelectedSlotNumber={setSelectedSlotNumber}
+                                                setSelectedSlotText={setSelectedSlotText}
+                                                selectedSlotNumber={selectedSlotNumber}
+                                                selectedSlotText={selectedSlotText}
+                                                userSNUID={userSNUID}
                                /></>}/>
 
 

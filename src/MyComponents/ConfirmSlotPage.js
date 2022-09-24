@@ -6,6 +6,9 @@ import axios from "axios";
 
 export const ConfirmSlotPage = (props) => {
 
+    const [checked, setChecked] = useState(false)
+
+
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -55,10 +58,22 @@ export const ConfirmSlotPage = (props) => {
         }
     }
 
+    const updateSelectedSlotDetails = () => {
+        if(localStorage.getItem("selected_slot_number") === null || localStorage.getItem("selected_slot_text")=== null) {
+            console.log("slot code and text not found in local storage")
+            routeChange('/book-slot')
+        }
+        else{
+            props.setSelectedSlotNumber(localStorage.getItem("selected_slot_number"))
+            props.setSelectedSlotText(localStorage.getItem("selected_slot_text"))
+        }
+    }
+
 
     useEffect(() => {
         verifyLogin()
         updateSelectedDays()
+        updateSelectedSlotDetails()
     }, []);
 
 
@@ -66,12 +81,22 @@ export const ConfirmSlotPage = (props) => {
             <div className="container h-100 d-flex justify-content-center">
                 <h3>Confirm Selected Slot</h3>
             </div>
-            <h4>your slot details here</h4>
+            <h4>Your slot details</h4>
+            <ul className="list-group">
+                <li className="list-group-item">Selected Days : {props.selectedDaysText}</li>
+                <li className="list-group-item">Selected Time Slot : {props.selectedSlotText}</li>
+                <li className="list-group-item">
+                    <div className="form-check">
+                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={() => setChecked(!checked)}/>
+                            <label className="form-check-label" htmlFor="flexCheckDefault">
+                                I agree to go to gym during the above mentioned slot and not miss any booked slot
+                            </label>
+                    </div>
+                    </li>
+                <li className="list-group-item">Email: {props.userSNUID}</li>
+            </ul>
             <div className="container h-100 d-flex justify-content-center">
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button type="button" className="btn btn-success my-3" onClick={clickYes}>   Yes   </button>
-                    <button type="button" className="btn btn-danger my-3" onClick={clickNo}>   No   </button>
-                </div>
+                    <button type="button" className="btn btn-success my-3" onClick={clickYes} disabled={!checked}>CONFIRM SLOT</button>
                 <br/>
                 <br/>
             </div>
