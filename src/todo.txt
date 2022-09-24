@@ -5,3 +5,4 @@ select days page load pe check if user has booked slot or not, if booked, redire
 mark attendance page pe show slot details of user
 on loading login page, delete all saved local storages
 make function to call API and python API to fetch user slot details and display on YourSlotDetailsPage
+make register page and API

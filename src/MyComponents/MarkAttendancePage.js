@@ -5,7 +5,7 @@ import {useState, useEffect} from "react";
 
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css'
-import {toast, ToastContainer} from "react-toastify";
+import {collapseToast, toast, ToastContainer} from "react-toastify";
 
 export const MarkAttendancePage = (props) => {
 
@@ -77,31 +77,32 @@ export const MarkAttendancePage = (props) => {
 
 
     const getLocation = async () => {
-        await navigator.geolocation.getCurrentPosition(function(position) {
-            console.log("Latitude is :", position.coords.latitude);
-            console.log("Longitude is :", position.coords.longitude);
-            setUserLatitude(position.coords.latitude)
-            setUserLongitude(position.coords.longitude)
-            success_notification("Location Collected successfully")
-        },function (error){
-            console.log(error)
-            console.log(error)
-            warn_notification(error.message.toString())
-        },{enableHighAccuracy: true, timeout: 10000, showLocationDialog: true,
-            forceRequestLocation: true});
+        return new Promise(function(resolve,reject) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                console.log("Latitude is :", position.coords.latitude);
+                console.log("Longitude is :", position.coords.longitude);
+                setUserLatitude(position.coords.latitude)
+                setUserLongitude(position.coords.longitude)
+                success_notification("Location Collected successfully")
+                resolve(position)
+            }, function (error) {
+                console.log(error)
+                reject()
+                warn_notification(error.message.toString())
+            }, {
+                enableHighAccuracy: true, timeout: 20000, showLocationDialog: true,
+                forceRequestLocation: true
+            });
+        })
     }
 
 
-
-    const markAttendanceButtonClick = (e) => {
+    const markAttendanceButtonClick = async (e) => {
         e.preventDefault()
-        getLocation()
-        getIPv4()
-
+        await getLocation()
+        await getIPv4()
 
     }
-
-
 
 
     return (<>
@@ -113,7 +114,9 @@ export const MarkAttendancePage = (props) => {
             </div>
 
             <div className="container h-100 d-flex justify-content-center">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={markAttendanceButtonClick}>Mark Attendance</button>
+                <button type="button" className="btn btn-success btn-lg my-3 mx-3"
+                        onClick={markAttendanceButtonClick}>Mark Attendance
+                </button>
             </div>
             <p>Latitude: {userLatitude}</p>
             <p>Longitude: {userLongitude}</p>
