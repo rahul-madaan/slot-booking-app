@@ -15,6 +15,8 @@ function App() {
     const [selectedDaysCode, setSelectedDaysCode] = useState("")
     const [selectedDaysText, setSelectedDaysText] = useState("")
     const [confirmSelectionDisabled, setConfirmSelectionButtonDisabled] = useState(true)
+    const [selectedSlotNumber, setSelectedSlotNumber] = useState("")
+    const [selectedSlotText, setSelectedSlotText] = useState("")
 
 
     return (
@@ -37,7 +39,14 @@ function App() {
                                                setSelectedDaysText={setSelectedDaysText}
                                                selectedDaysCode={selectedDaysCode}
                                                setSelectedDaysCode={setSelectedDaysCode}
-                                               setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}/></>}/>
+                                               setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}
+                                               setSelectedSlotNumber={setSelectedSlotNumber}
+                                               setSelectedSlotText={setSelectedSlotText}
+                                               selectedSlotNumber={selectedSlotNumber}
+                                               selectedSlotText={selectedSlotText}
+
+
+                               /></>}/>
 
                     <Route exact path="/select-days"
                            element={<>
@@ -56,7 +65,12 @@ function App() {
 
                     <Route exact path="/confirm-slot"
                            element={<>
-                               <ConfirmSlotPage setUserSNUID={setUserSNUID}/></>}/>
+                               <ConfirmSlotPage setUserSNUID={setUserSNUID}
+                                                setSelectedDaysCode={setSelectedDaysCode}
+                                                setSelectedDaysText={setSelectedDaysText}
+                                                setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}
+                                                selectedDaysText={selectedDaysText}
+                               /></>}/>
 
 
                     <Route exact path="/" element={<Navigate to="/login"/>}/>

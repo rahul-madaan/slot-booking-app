@@ -76,7 +76,7 @@ export const MarkAttendancePage = (props) => {
     }
 
 
-    const getLocation = async (callback) => {
+    const getLocation = async () => {
         await navigator.geolocation.getCurrentPosition(function(position) {
             console.log("Latitude is :", position.coords.latitude);
             console.log("Longitude is :", position.coords.longitude);
@@ -89,14 +89,14 @@ export const MarkAttendancePage = (props) => {
             warn_notification(error.message.toString())
         },{enableHighAccuracy: true, timeout: 10000, showLocationDialog: true,
             forceRequestLocation: true});
-        callback()
     }
 
 
 
     const markAttendanceButtonClick = (e) => {
         e.preventDefault()
-        getLocation(getIPv4)
+        getLocation()
+        getIPv4()
 
 
     }

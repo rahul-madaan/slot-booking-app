@@ -45,16 +45,16 @@ export const SlotsTablePage = (props) => {
 
 
     const updateSelectedDays = () => {
-        if(localStorage.getItem("selected_days_code") === null || localStorage.getItem("selected_days_text")=== null) {
+        if (localStorage.getItem("selected_days_code") === null || localStorage.getItem("selected_days_text") === null) {
             console.log("days code and text not found in local storage")
             routeChange('/select-days')
-        }
-        else{
+        } else {
             props.setSelectedDaysCode(localStorage.getItem("selected_days_code"))
             props.setSelectedDaysText(localStorage.getItem("selected_days_text"))
             props.setConfirmSelectionButtonDisabled(false)
         }
     }
+
 // temporary jugaad hai
     useLayoutEffect(()=>{
         updateSelectedDays()
@@ -81,7 +81,14 @@ export const SlotsTablePage = (props) => {
                 </thead>
                 <tbody>
                 {props.timeSlots.map((timeslots,index) => {
-                    return <SlotsTableContent timeSlots={timeslots} index={index} availableSlotCount={slotAvailabilityArray[index]} selectedDaysCode={props.selectedDaysCode}/>
+                    return <SlotsTableContent timeSlots={timeslots}
+                                              index={index}
+                                              availableSlotCount={slotAvailabilityArray[index]}
+                                              selectedDaysCode={props.selectedDaysCode}
+                                              setSelectedSlotNumber={props.setSelectedSlotNumber}
+                                              setSelectedSlotText={props.setSelectedSlotText}
+                                              selectedSlotNumber={props.selectedSlotNumber}
+                                              selectedSlotText={props.selectedSlotText}/>
                 })}
                 </tbody>
             </table>
