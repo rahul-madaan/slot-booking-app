@@ -13,13 +13,24 @@ export const MarkAttendancePage = (props) => {
     const [userLongitude, setUserLongitude] = useState(0)
     const [userIPv4, setUserIPv4] = useState(0)
 
-    const notify = () => toast('Attendance marked successfully!', {
-        position: "top-right",
+    const warn_notification = (content) => toast.warn(content, {
+        position: "bottom-right",
         autoClose: 4000,
         hideProgressBar: false,
         closeOnClick: true,
         draggable: true,
         progress: undefined,
+        newestOnTop: true
+    });
+
+    const success_notification = (content) => toast.success(content, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        newestOnTop: true
     });
 
     const verifyLogin = () => {
@@ -61,31 +72,36 @@ export const MarkAttendancePage = (props) => {
         const res = await axios.get('https://geolocation-db.com/json/')
         console.log(res.data);
         setUserIPv4(res.data.IPv4)
-        notify()
+        success_notification('IPv4 Collected successfully')
     }
 
 
-    const getLocation = async () => {
+    const getLocation = async (callback) => {
         await navigator.geolocation.getCurrentPosition(function(position) {
             console.log("Latitude is :", position.coords.latitude);
             console.log("Longitude is :", position.coords.longitude);
             setUserLatitude(position.coords.latitude)
             setUserLongitude(position.coords.longitude)
+            success_notification("Location Collected successfully")
         },function (error){
             console.log(error)
-            console.log("Location access do")
+            console.log(error)
+            warn_notification(error.message.toString())
         },{enableHighAccuracy: true, timeout: 10000, showLocationDialog: true,
             forceRequestLocation: true});
+        callback()
     }
 
 
 
-    const markAttendanceButtonClick = async (e) => {
+    const markAttendanceButtonClick = (e) => {
         e.preventDefault()
-        getLocation()
-        getIPv4()
+        getLocation(getIPv4)
+
 
     }
+
+
 
 
     return (<>
