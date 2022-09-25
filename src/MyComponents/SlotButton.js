@@ -44,6 +44,9 @@ export const SlotButton = (props) => {
             'slot_number': e.target.getAttribute('data-value-index-number')
         }).then((result) => {
             console.log(result)
+            if(result.data.Status==="1 slot already booked"){
+                warn_notification("You have already booked a slot")
+            }
             if (result.data.Status === "TEMP_BOOKED") {
                 routeChange('/confirm-slot')
                 success_notification("Slot reserved for 15 minutes")
