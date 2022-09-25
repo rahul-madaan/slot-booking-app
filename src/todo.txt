@@ -5,3 +5,6 @@ mark attendance page pe show slot details of user
 on loading login page, delete all saved local storages
 make function to call API and python API to fetch user slot details and display on YourSlotDetailsPage
 after click book slot button, check again if slot got full then show error and refresh page
+redirect select-days and book-slot to your slot details if slot has been booked by user
+instead of making your slot detials page, write slot details in mark attendance page only
+dont disable mark attendance button if not in time stot, let the check happen and give notification error.

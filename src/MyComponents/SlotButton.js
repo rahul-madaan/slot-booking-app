@@ -50,7 +50,7 @@ export const SlotButton = (props) => {
             }
             else if(result.data.Status === "ALREADY_FULL"){
                 routeChange('/book-slot')
-                warn_notification("All slots got filled, select another slot")
+                warn_notification("All slots just got filled, refresh page and select another slot")
             }
         })
     }

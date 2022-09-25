@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 
 import axios from "axios";
+import {toast} from "react-toastify";
 
 export const ConfirmSlotPage = (props) => {
 
@@ -14,12 +15,43 @@ export const ConfirmSlotPage = (props) => {
         navigate(path);
     }
 
-    const clickYes = (e) => {
-        e.preventDefault()
-    }
+    const warn_notification = (content) => toast.warn(content, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        newestOnTop: true
+    });
 
-    const clickNo = (e) => {
+    const success_notification = (content) => toast.success(content, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        newestOnTop: true
+    });
+
+    const clickConfirm = (e) => {
         e.preventDefault()
+        axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/confirm-reserved-slot", {
+            "email_id": props.userSNUID,
+            "days_code": props.selectedDaysCode,
+            "slot_number": props.selectedSlotNumber
+        }).then((result) => {
+            if (result.data.status === "Booked slot successfully") {
+                //change route to your slot details page
+                success_notification("Booked slot successfully!")
+            } else if (result.data.status === "15 minutes expired, book another slot") {
+                warn_notification("15 minutes expired, book another slot")
+                routeChange("/select-days")
+            }
+        }).catch(error => {
+            console.log(error.response)
+        })
     }
 
 
@@ -96,7 +128,7 @@ export const ConfirmSlotPage = (props) => {
                 <li className="list-group-item">Email: {props.userSNUID}</li>
             </ul>
             <div className="container h-100 d-flex justify-content-center">
-                    <button type="button" className="btn btn-success my-3" onClick={clickYes} disabled={!checked}>CONFIRM SLOT</button>
+                    <button type="button" className="btn btn-success my-3" onClick={clickConfirm} disabled={!checked}>CONFIRM SLOT</button>
                 <br/>
                 <br/>
             </div>
