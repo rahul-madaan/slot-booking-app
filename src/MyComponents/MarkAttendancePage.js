@@ -5,13 +5,14 @@ import {useState, useEffect} from "react";
 
 import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css'
-import {collapseToast, toast, ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
 
 export const MarkAttendancePage = (props) => {
 
     const [userLatitude, setUserLatitude] = useState(0)
     const [userLongitude, setUserLongitude] = useState(0)
     const [userIPv4, setUserIPv4] = useState(0)
+    const [markAttendanceLoading, setMarkAttendanceLoading] = useState(false)
 
     const warn_notification = (content) => toast.warn(content, {
         position: "bottom-right",
@@ -99,8 +100,10 @@ export const MarkAttendancePage = (props) => {
 
     const markAttendanceButtonClick = async (e) => {
         e.preventDefault()
+        setMarkAttendanceLoading(true)
         await getLocation()
         await getIPv4()
+        setMarkAttendanceLoading(false)
 
     }
 
@@ -114,9 +117,13 @@ export const MarkAttendancePage = (props) => {
             </div>
 
             <div className="container h-100 d-flex justify-content-center">
-                <button type="button" className="btn btn-success btn-lg my-3 mx-3"
+                {!markAttendanceLoading?<button type="button" className="btn btn-success btn-lg my-3 mx-3"
                         onClick={markAttendanceButtonClick}>Mark Attendance
-                </button>
+                </button>:
+                <button className="btn btn-success btn-lg my-3 mx-3" type="button" disabled>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"/>
+                     Marking Present
+                </button>}
             </div>
             <p>Latitude: {userLatitude}</p>
             <p>Longitude: {userLongitude}</p>
