@@ -97,7 +97,8 @@ export const SlotsTablePage = (props) => {
                                               setSelectedSlotNumber={props.setSelectedSlotNumber}
                                               setSelectedSlotText={props.setSelectedSlotText}
                                               selectedSlotNumber={props.selectedSlotNumber}
-                                              selectedSlotText={props.selectedSlotText} userSNUID={props.userSNUID}/>
+                                              selectedSlotText={props.selectedSlotText}
+                                              userSNUID={props.userSNUID}/>
                 })}
                 </tbody>
             </table>
