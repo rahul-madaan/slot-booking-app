@@ -96,7 +96,7 @@ function App() {
 
                     <Route exact path="/your-slot-details"
                            element={<>
-                               <RegisterPage setUserSNUID={setUserSNUID} userSNUID={userSNUID}
+                               <YourSlotDetailsPage setUserSNUID={setUserSNUID} userSNUID={userSNUID}
                                /></>}/>
 
 
