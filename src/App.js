@@ -8,6 +8,8 @@ import {MarkAttendancePage} from "./MyComponents/MarkAttendancePage";
 import {ConfirmSlotPage} from "./MyComponents/ConfirmSlotPage";
 import {YourSlotDetailsPage} from "./MyComponents/YourSlotDetailsPage";
 import {RegisterPage} from "./MyComponents/RegisterPage";
+import 'react-toastify/dist/ReactToastify.css'
+import {toast, ToastContainer} from "react-toastify";
 
 const timeSlots = ["6:00-6:45 AM", "7:00-7:45 AM", "8:00-8:45 AM", "4:00-4:45 PM", "5:00-5:45 PM", "6:00-6:45 PM", "7:00-7:45 PM", "8:00-8:45 PM"];
 
@@ -109,6 +111,7 @@ function App() {
                     <Route exact path="/" element={<Navigate to="/login"/>}/>
                 </Routes>
             </Router>
+            <ToastContainer/>
         </>
     );
 }

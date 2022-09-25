@@ -17,7 +17,7 @@ export const SlotsTableContent = (props) => {
                                 setSelectedSlotNumber={props.setSelectedSlotNumber}
                                 setSelectedSlotText={props.setSelectedSlotText}
                                 selectedSlotNumber={props.selectedSlotNumber}
-                                selectedSlotText={props.selectedSlotText}/></td>
+                                selectedSlotText={props.selectedSlotText} userSNUID={props.userSNUID}/></td>
             </tr>
         </>
     )

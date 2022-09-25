@@ -129,7 +129,6 @@ export const MarkAttendancePage = (props) => {
             <p>Longitude: {userLongitude}</p>
             <p>IPv4 Address: {userIPv4}</p>
 
-            <ToastContainer/>
 
         </>
     )
