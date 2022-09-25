@@ -7,7 +7,6 @@ import {SelectDaysPage} from "./MyComponents/SelectDaysPage";
 import {MarkAttendancePage} from "./MyComponents/MarkAttendancePage";
 import {ConfirmSlotPage} from "./MyComponents/ConfirmSlotPage";
 import {YourSlotDetailsPage} from "./MyComponents/YourSlotDetailsPage";
-import {RegisterPage} from "./MyComponents/RegisterPage";
 import 'react-toastify/dist/ReactToastify.css'
 import {toast, ToastContainer} from "react-toastify";
 
@@ -30,13 +29,6 @@ function App() {
                     <Route exact path="/login"
                            element={<>
                                <LoginPage userSNUID={userSNUID}
-                                          setUserSNUID={setUserSNUID}
-                                          loginPassword={loginPassword}
-                                          setLoginPassword={setLoginPassword}/></>}/>
-
-                    <Route exact path="/register"
-                           element={<>
-                               <RegisterPage userSNUID={userSNUID}
                                           setUserSNUID={setUserSNUID}
                                           loginPassword={loginPassword}
                                           setLoginPassword={setLoginPassword}/></>}/>
