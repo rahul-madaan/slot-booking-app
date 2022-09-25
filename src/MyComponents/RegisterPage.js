@@ -1,6 +1,8 @@
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect} from "react";
+import 'react-toastify/dist/ReactToastify.css'
+import {toast, ToastContainer} from "react-toastify";
 
 export const RegisterPage = (props) => {
     const [registerPassword, setRegisterPassword] = React.useState("")
@@ -8,6 +10,30 @@ export const RegisterPage = (props) => {
     const [registerEmail, setRegisterEmail] = React.useState("")
     const [registerPhoneNumber, setRegisterPhoneNumber] = React.useState("")
     const [tempPhoneNumber, setTempPhoneNumber] = React.useState("")
+    const [disableRegisterButton, setDisableRegisterButton] = React.useState(false)
+
+
+    const warn_notification = (content) => toast.warn(content, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        newestOnTop: true
+    });
+
+    const success_notification = (content) => toast.success(content, {
+        position: "bottom-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        progress: undefined,
+        newestOnTop: true
+    });
+
+
     let navigate = useNavigate();
     const routeChange = (path) => {
         navigate(path);
@@ -15,122 +41,106 @@ export const RegisterPage = (props) => {
 
     const registerSubmit = (e) => {
         e.preventDefault()
-        if(registerUserName === ''){
-            setShowWarning(true)
-            setWarningContent("Name cannot be blank!")
-        }
-        else if(registerEmail === ''){
-            setShowWarning(true)
-            setWarningContent("Email cannot be blank!")
-        }
-        else if(registerEmail.includes('.') === false || registerEmail.includes('@') === false){
-            setShowWarning(true)
-            setWarningContent("Email must have . and @")
-        }
-        else if(registerEmail.includes('@snu.edu.in') === false){
-            setShowWarning(true)
-            setWarningContent("You can only register using SNU EmailID")
-        }
-        else if(registerPhoneNumber.length !== 10){
-            setShowWarning(true)
-            setWarningContent("Enter a Valid 10 Digit Phone Number!")
-        }
-        else if(registerPassword.length < 4){
-            setShowWarning(true)
-            setWarningContent("Password cannot be less than 4 characters!")
-        }
-        else{
-            axios.get("http://localhost:8000/check-aadhaar-validity/" + registerAadhaarNumber)
-                .then((res)=>{
-                    if(res.data[0].status_code === 1){
-                        axios.post("http://localhost:8000/register_user", {
-                            'aadhaar_number': registerAadhaarNumber,
-                            'password': registerPassword,
-                            'user_name': registerUserName,
-                            'email': registerEmail,
-                            'phone_number': registerPhoneNumber
-                        }).then((result) => {
-                            console.log(result)
-                            routeChange("/login")
-                            props.setRegisterSuccessNotif(true)
-                            setTimeout(() => {
-                                props.setRegisterSuccessNotif(false)
-                            }, 4000)
-                        })
-                    }else{
-                        setShowWarning(true)
-                        setWarningContent("User already registered!")
-                    }
-                })
-
+        if (registerUserName === '') {
+            warn_notification("Name cannot be blank!")
+        } else if (registerUserName.includes(".") || registerUserName.includes("@") || registerUserName.includes("#") || registerUserName.includes("$") || registerUserName.includes("!") || registerUserName.includes("%") || registerUserName.includes("^") || registerUserName.includes("&") || registerUserName.includes("*") || registerUserName.includes("(") || registerUserName.includes(")") || registerUserName.includes("+") || registerUserName.includes("-") || registerUserName.includes("\\") || registerUserName.includes("?") || registerUserName.includes(":") || registerUserName.includes("}") || registerUserName.includes("{") || registerUserName.includes("/") || registerUserName.includes(";")) {
+            warn_notification("Name cannot contain special characters!")
+        } else if (registerEmail === '') {
+            warn_notification("Email cannot be blank!")
+        } else if (registerEmail.includes('.') === false || registerEmail.includes('@') === false) {
+            warn_notification("Email must have . and @")
+        } else if (registerEmail.includes('@snu.edu.in') === false) {
+            warn_notification("You can only register using SNU EmailID (@snu.edu.in)")
+        } else if (registerPhoneNumber.length !== 10) {
+            warn_notification("Enter a Valid 10 Digit Phone Number!")
+        } else if (registerPassword.length < 4) {
+            warn_notification("Password cannot be less than 4 characters!")
+        } else {
+            axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/register", {
+                'password': registerPassword,
+                'name': registerUserName,
+                'email_id': registerEmail,
+                'phone_number': registerPhoneNumber
+            }).then((result) => {
+                console.log(result)
+                if (result.data.status === "User registered successfully!") {
+                    success_notification("User Registered! Redirecting to login page")
+                    setTimeout(() => {
+                        routeChange("/login")
+                        setDisableRegisterButton(true)
+                    }, 4000)
+                }
+                else if(result.data.status === "User already registered!"){
+                    warn_notification(result.data.status)
+                }
+            })
         }
     }
 
-    useEffect(()=>{
-        if(registerAadhaarNumber==='0'){
-            setRegisterAadhaarNumber('')
-        }
-        if(registerAadhaarNumber.length===12){
-            setTempAadhaar(registerAadhaarNumber)
-        }
-        if(registerAadhaarNumber.length>12){
-            setRegisterAadhaarNumber(tempAadhaar)
-        }
-    },[registerAadhaarNumber])
 
-    useEffect(()=>{
-        if(registerPhoneNumber==='0'){
+    useEffect(() => {
+        if (registerPhoneNumber === '0') {
             setRegisterPhoneNumber('')
         }
-        if(registerPhoneNumber.length===10){
+        if (registerPhoneNumber.length === 10) {
             setTempPhoneNumber(registerPhoneNumber)
         }
-        if(registerPhoneNumber.length>10){
+        if (registerPhoneNumber.length > 10) {
             setRegisterPhoneNumber(tempPhoneNumber)
         }
-    },[registerPhoneNumber])
+
+    }, [registerPhoneNumber])
+
+
+    useEffect(() => {
+        if (registerEmail==="" || registerUserName==="" || registerPhoneNumber==="" || registerPassword===""){
+            setDisableRegisterButton(true)
+        }
+        else{
+            setDisableRegisterButton(false)
+        }
+    }, [registerEmail,registerUserName,registerPhoneNumber,registerPassword])
+
 
     return (
         <div className="mx-5">
+            <h2>Register User</h2>
+            <hr/>
             <form onSubmit={registerSubmit}>
                 <div className="mb-3">
-                    <label className="form-label">Aadhaar Number</label>
-                    <input type="number" placeholder="Enter 12 Digit Aadhaar Number"  value={registerAadhaarNumber} onChange={(e) => {
-                        setRegisterAadhaarNumber(e.target.value)
-                    }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-                    <div id="emailHelp" className="form-text">We'll never share your Aadhaar Number with anyone else.
-                    </div>
-                </div>
-                <div className="mb-3">
                     <label className="form-label">Full Name</label>
-                    <input type="text" placeholder="Enter your full name"  value={registerUserName} onChange={(e) => {
-                        setRegisterUserName(e.target.value)
-                    }} className="form-control" />
+                    <input type="text" placeholder="Enter your full name" value={registerUserName}
+                           onChange={(e) => {
+                               setRegisterUserName(e.target.value)
+                           }} className="form-control"/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email ID</label>
-                    <input type="text" placeholder="Enter email ID"  value={registerEmail} onChange={(e) => {
+                    <input type="text" placeholder="Enter email ID" value={registerEmail} onChange={(e) => {
                         setRegisterEmail(e.target.value)
-                    }} className="form-control" />
+                    }} className="form-control"/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Phone Number</label>
-                    <input type="number" placeholder="Enter 10 Digit Phone Number"  value={registerPhoneNumber} onChange={(e) => {
-                        setRegisterPhoneNumber(e.target.value)
-                    }} className="form-control" />
+                    <input type="number" placeholder="Enter 10 Digit Phone Number" value={registerPhoneNumber}
+                           onChange={(e) => {
+                               setRegisterPhoneNumber(e.target.value)
+                           }} className="form-control"/>
                 </div>
                 <div className="mb-3">
                     <label className="form-label">New Password</label>
-                    <input type="password" placeholder="Set a new password" value={registerPassword} onChange={(e) => {
-                        setRegisterPassword(e.target.value)
-                    }} className="form-control" id="exampleInputPassword1"/>
+                    <input type="password" placeholder="Set a new password" value={registerPassword}
+                           onChange={(e) => {
+                               setRegisterPassword(e.target.value)
+                           }} className="form-control" id="exampleInputPassword1"/>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={registerSubmit}>Register</button>
+                <button type="submit" className="btn btn-primary" onClick={registerSubmit}
+                        disabled={disableRegisterButton}>Register
+                </button>
             </form>
-            {showWarning ?
-                <div className="alert alert-danger my-3" role="alert">
-                    {warningContent}
-                </div> : null}
+            <ToastContainer/>
         </div>
+
+
     )
 }

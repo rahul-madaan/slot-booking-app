@@ -1,8 +1,7 @@
-add email constraint on login page (allow only snu.edu.in domain email IDs)
 time based mark attendance or book slot.
 if we get wifi ssid, then no issue(SSID, IP, Geolocation)
 select days page load pe check if user has booked slot or not, if booked, redirect to slot details page
 mark attendance page pe show slot details of user
 on loading login page, delete all saved local storages
 make function to call API and python API to fetch user slot details and display on YourSlotDetailsPage
-make register page and API
+after click book slot button, check again if slot got full then show error and refresh page

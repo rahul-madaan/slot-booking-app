@@ -32,6 +32,13 @@ function App() {
                                           loginPassword={loginPassword}
                                           setLoginPassword={setLoginPassword}/></>}/>
 
+                    <Route exact path="/register"
+                           element={<>
+                               <RegisterPage userSNUID={userSNUID}
+                                          setUserSNUID={setUserSNUID}
+                                          loginPassword={loginPassword}
+                                          setLoginPassword={setLoginPassword}/></>}/>
+
                     <Route exact path="/book-slot"
                            element={<><h3>Select Your Gym Slot</h3>
                                <SlotsTablePage timeSlots={timeSlots}
@@ -93,10 +100,10 @@ function App() {
                                                     userSNUID={userSNUID}
                                /></>}/>
 
-                    {/*<Route exact path="/your-slot-details"*/}
-                    {/*       element={<>*/}
-                    {/*           <RegisterPage setUserSNUID={setUserSNUID}*/}
-                    {/*           /></>}/>*/}
+                    <Route exact path="/your-slot-details"
+                           element={<>
+                               <RegisterPage setUserSNUID={setUserSNUID} userSNUID={userSNUID}
+                               /></>}/>
 
 
                     <Route exact path="/" element={<Navigate to="/login"/>}/>

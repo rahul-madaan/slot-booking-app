@@ -41,6 +41,8 @@ export const LoginPage = (props) => {
 
     return (
         <div className="mx-5">
+            <h2>User Login</h2>
+            <hr/>
             <form onSubmit={loginSubmit}>
                 <div className="mb-3">
                     <label  className="form-label">Enter SNU ID</label>
