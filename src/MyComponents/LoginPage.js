@@ -193,9 +193,10 @@ export const LoginPage = (props) => {
                         <div className="mb-3">
                             <label  className="form-label">SNU Email ID</label>
                             <input type="text" value={props.userSNUID} onChange={(e) => {
-                                props.setUserSNUID(e.target.value)
+                                props.setUserSNUID(e.target.value.toLowerCase())
                             }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={"Enter SNU ID"}/>
                         </div>
+                        <p>{props.userSNUID}</p>
                         <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input type="password" value={props.loginPassword} onChange={(e) => {
@@ -227,7 +228,7 @@ export const LoginPage = (props) => {
                         <div className="mb-3">
                             <label className="form-label">Email ID</label>
                             <input type="text" placeholder="Enter email ID" value={registerEmail} onChange={(e) => {
-                                setRegisterEmail(e.target.value)
+                                setRegisterEmail(e.target.value.toLowerCase())
                             }} className="form-control"/>
                         </div>
                         <div className="mb-3">
