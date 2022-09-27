@@ -9,13 +9,9 @@ import {
     MDBTabsLink,
     MDBTabsContent,
     MDBTabsPane,
-    MDBBtn,
-    MDBIcon,
-    MDBInput,
-    MDBCheckbox
 }
     from 'mdb-react-ui-kit';
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 
 
 export const LoginPage = (props) => {
@@ -32,6 +28,7 @@ export const LoginPage = (props) => {
         }).then((result) => {
             if (result.data.statusCode === 0) {
                 props.setUserSNUID(props.userSNUID)
+                localStorage.clear()
                 localStorage.setItem("user_emailID", result.data.encrypted_emailID)
                 localStorage.setItem("user_emailID_len", result.data.email_len)
                 routeChange('/select-days')
@@ -164,6 +161,7 @@ export const LoginPage = (props) => {
         }
     }, [props.userSNUID,props.loginPassword])
 
+
     return (
         <>
             <MDBContainer className="p-3 my-3 d-flex flex-column w-75">
@@ -196,7 +194,6 @@ export const LoginPage = (props) => {
                                 props.setUserSNUID(e.target.value.toLowerCase())
                             }} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={"Enter SNU ID"}/>
                         </div>
-                        <p>{props.userSNUID}</p>
                         <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input type="password" value={props.loginPassword} onChange={(e) => {
@@ -207,7 +204,15 @@ export const LoginPage = (props) => {
                             <a href="!#">Forgot password?</a>
                         </div>
                         <div className="text-center mb-3 ">
-                            <button type="submit" className="btn btn-primary my-3 w-75" onClick={loginSubmit} disabled={disableLoginButton}>Log in
+                            <button type="submit" className="btn btn-primary my-3 w-75" onClick={loginSubmit} disabled={disableLoginButton} onKeyPress={(e) => {
+                                console.log(e.key)
+                                if (e.key === "Enter") {
+                                    this.setState({ message: e.target.value },
+                                        () => {
+                                            alert(this.state.message);
+                                        });
+                                }
+                            }}>Log in
                             </button>
                         </div>
 

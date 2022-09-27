@@ -62,7 +62,18 @@ function App() {
 
                     <Route exact path="/mark-attendance"
                            element={<>
-                               <MarkAttendancePage setUserSNUID={setUserSNUID}/></>}/>
+                               <MarkAttendancePage setUserSNUID={setUserSNUID}
+                                                   userSNUID={userSNUID}
+                                                   selectedDaysCode={selectedDaysCode}
+                                                   setSelectedDaysCode={setSelectedDaysCode}
+                                                   selectedDaysText={selectedDaysText}
+                                                   setSelectedDaysText={setSelectedDaysText}
+                                                   selectedSlotNumber={selectedSlotNumber}
+                                                   setSelectedSlotNumber={setSelectedSlotNumber}
+                                                   selectedSlotText={selectedSlotText}
+                                                   setSelectedSlotText={setSelectedSlotText}
+                                                   timeslots={timeSlots}
+                               /></>}/>
 
                     <Route exact path="/confirm-slot"
                            element={<>
