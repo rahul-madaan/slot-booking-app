@@ -17,15 +17,16 @@ export const MarkAttendancePage = (props) => {
     const [markAttendanceDisabled, setMarkAttendanceDisabled] = useState(true)
     const [userSNUID, setUserSNUID] = useState("")
     const [browserFingerprint, setBrowserFingerprint] = useState("")
-
-    getCurrentBrowserFingerPrint().then((fingerprint) => {
-        // fingerprint is your unique browser id.
-        // This is well tested
-        console.log("Browser Fingerprint: " + fingerprint)
-        setBrowserFingerprint(fingerprint)
-
-        // the result you receive here is the combination of Canvas fingerprint and audio fingerprint.
-    })
+    const [startDate, setStartDate] = useState("")
+    //
+    // getCurrentBrowserFingerPrint().then((fingerprint) => {
+    //     // fingerprint is your unique browser id.
+    //     // This is well tested
+    //     console.log("Browser Fingerprint: " + fingerprint)
+    //     setBrowserFingerprint(fingerprint)
+    //
+    //     // the result you receive here is the combination of Canvas fingerprint and audio fingerprint.
+    // })
 
     const warn_notification = (content) => toast.warn(content, {
         position: "bottom-right",
@@ -48,13 +49,13 @@ export const MarkAttendancePage = (props) => {
     });
 
 
+
     const verifyLogin = () => {
         console.log("login verify started")
         axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/verify-login", {
             'encrypted_email_ID': localStorage.getItem("user_emailID"),
             'encrypted_email_ID_len': localStorage.getItem("user_emailID_len")
         }).then((result) => {
-            const SNUID = result.data.user_emailID
             console.log("lol")
             console.log(result.data.loginSuccess)
             if (result.data.loginSuccess === 0) {
@@ -66,7 +67,7 @@ export const MarkAttendancePage = (props) => {
             } else if (result.data.loginSuccess === 1) {
                 console.log("fetched email= " + result.data.user_emailID)
                 props.setUserSNUID(result.data.user_emailID)
-                setUserSNUID(SNUID)
+                setUserSNUID(result.data.user_emailID)
                 console.log("Login verified successfully")
             }
         }).catch(error => {
@@ -79,7 +80,7 @@ export const MarkAttendancePage = (props) => {
     }
 
 
-    function getSlotDetails() {
+    const getSlotDetails = () => {
         console.log("Fetching slot details...")
         axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/fetch-user-slot-details", {
             'email_id': props.userSNUID
@@ -95,6 +96,7 @@ export const MarkAttendancePage = (props) => {
                 props.setSelectedSlotNumber(result.data.slot_number)
                 props.setSelectedDaysCode(result.data.days_code)
                 props.setSelectedSlotText(props.timeslots[parseInt(result.data.slot_number) - 1])
+                setStartDate(result.data.start_date)
                 if (result.data.days_code === "MWF")
                     props.setSelectedDaysText("Monday, Wednesday, Friday")
                 if (result.data.days_code === "TTS")
@@ -106,9 +108,15 @@ export const MarkAttendancePage = (props) => {
 
     useEffect(() => {
         verifyLogin()
-        getSlotDetails()
-
     }, []);
+
+    useEffect(() => {
+        if (userSNUID === "") {
+        } else {
+            getSlotDetails()
+
+        }
+    }, [userSNUID]);
 
 
     let navigate = useNavigate();
@@ -156,9 +164,43 @@ export const MarkAttendancePage = (props) => {
 
     return (<>
             <br/>
-            <p>{props.userSNUID}</p>
             <div className="container h-100 d-flex justify-content-center">
                 <h3>Mark your attendance</h3>
+            </div>
+            <hr/>
+
+            <div className="container h-100 d-flex justify-content-center">
+                <p className="fs-4">Your slot details</p>
+                {/*<p style={{ fontWeight: 'bold' }}>{"\nlol"}</p>*/}
+            </div>
+
+        <div className="container h-100 d-flex justify-content-center">
+        <table className="table">
+                <thead>
+                <tr>
+                    <th scope="col" className="fs-4">Detail</th>
+                    <th scope="col" className="fs-4">Your Slot</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Selected Days</th>
+                    <td>{props.selectedDaysText}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Selected Timings</th>
+                    <td>{props.selectedSlotText}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Start Date</th>
+                    <td colSpan="2">{startDate}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Booking Status</th>
+                    <td colSpan="2">BOOKED</td>
+                </tr>
+                </tbody>
+            </table>
             </div>
 
             <div className="container h-100 d-flex justify-content-center">
@@ -176,6 +218,12 @@ export const MarkAttendancePage = (props) => {
             <p>Longitude: {userLongitude}</p>
             <p>IPv4 Address: {userIPv4}</p>
             <p>Unique Device ID: {browserFingerprint}</p>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
 
         </>
