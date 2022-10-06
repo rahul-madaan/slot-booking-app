@@ -76,9 +76,6 @@ export const MarkAttendancePage = (props) => {
         }).catch(error => {
             console.log(error.response)
             routeChange('/login')
-        }).finally(res => {
-            console.log("set SNUID= " + props.userSNUID)
-            console.log("set SNUID= " + userSNUID)
         })
     }
 

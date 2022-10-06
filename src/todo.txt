@@ -10,3 +10,6 @@ instead of making your slot detials page, write slot details in mark attendance 
 dont disable mark attendance button if not in time stot, let the check happen and give notification error.
 remove TTS MWF from table for phone view
 make 404 page https://www.geeksforgeeks.org/how-to-setup-404-page-in-react-routing/
+make forget password page
+make user profile page and icon in top left
+make logout button in top right

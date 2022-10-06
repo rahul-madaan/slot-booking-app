@@ -43,7 +43,7 @@ export const ConfirmSlotPage = (props) => {
             "slot_number": props.selectedSlotNumber
         }).then((result) => {
             if (result.data.status === "Booked slot successfully") {
-                //change route to your slot details page
+                routeChange("/mark-attendance")
                 success_notification("Booked slot successfully!")
             } else if (result.data.status === "15 minutes expired, book another slot") {
                 warn_notification("15 minutes expired, book another slot")

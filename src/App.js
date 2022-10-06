@@ -6,7 +6,6 @@ import {useState} from "react";
 import {SelectDaysPage} from "./MyComponents/SelectDaysPage";
 import {MarkAttendancePage} from "./MyComponents/MarkAttendancePage";
 import {ConfirmSlotPage} from "./MyComponents/ConfirmSlotPage";
-import {YourSlotDetailsPage} from "./MyComponents/YourSlotDetailsPage";
 import 'react-toastify/dist/ReactToastify.css'
 import {toast, ToastContainer} from "react-toastify";
 
@@ -88,26 +87,6 @@ function App() {
                                                 selectedSlotNumber={selectedSlotNumber}
                                                 selectedSlotText={selectedSlotText}
                                                 userSNUID={userSNUID}
-                               /></>}/>
-
-                    <Route exact path="/your-slot-details"
-                           element={<>
-                               <YourSlotDetailsPage setUserSNUID={setUserSNUID}
-                                                    setSelectedDaysCode={setSelectedDaysCode}
-                                                    setSelectedDaysText={setSelectedDaysText}
-                                                    selectedDaysText={selectedDaysText}
-                                                    selectedDaysCode={selectedDaysCode}
-                                                    setConfirmSelectionButtonDisabled={setConfirmSelectionButtonDisabled}
-                                                    setSelectedSlotNumber={setSelectedSlotNumber}
-                                                    setSelectedSlotText={setSelectedSlotText}
-                                                    selectedSlotNumber={selectedSlotNumber}
-                                                    selectedSlotText={selectedSlotText}
-                                                    userSNUID={userSNUID}
-                               /></>}/>
-
-                    <Route exact path="/your-slot-details"
-                           element={<>
-                               <YourSlotDetailsPage setUserSNUID={setUserSNUID} userSNUID={userSNUID}
                                /></>}/>
 
 
