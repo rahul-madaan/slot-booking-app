@@ -18,15 +18,18 @@ export const MarkAttendancePage = (props) => {
     const [userSNUID, setUserSNUID] = useState("")
     const [browserFingerprint, setBrowserFingerprint] = useState("")
     const [startDate, setStartDate] = useState("")
-    //
-    // getCurrentBrowserFingerPrint().then((fingerprint) => {
-    //     // fingerprint is your unique browser id.
-    //     // This is well tested
-    //     console.log("Browser Fingerprint: " + fingerprint)
-    //     setBrowserFingerprint(fingerprint)
-    //
-    //     // the result you receive here is the combination of Canvas fingerprint and audio fingerprint.
-    // })
+
+    const getBrowserFingerprint = () => {
+        getCurrentBrowserFingerPrint().then((fingerprint) => {
+            // fingerprint is your unique browser id.
+            // This is well tested
+            console.log("Browser Fingerprint: " + fingerprint)
+            setBrowserFingerprint(fingerprint)
+            success_notification("Collected Unique Device ID Successfully!")
+            // the result you receive here is the combination of Canvas fingerprint and audio fingerprint.
+        })
+    }
+
 
     const warn_notification = (content) => toast.warn(content, {
         position: "bottom-right",
@@ -114,7 +117,6 @@ export const MarkAttendancePage = (props) => {
         if (userSNUID === "") {
         } else {
             getSlotDetails()
-
         }
     }, [userSNUID]);
 
@@ -155,6 +157,7 @@ export const MarkAttendancePage = (props) => {
 
     const markAttendanceButtonClick = async (e) => {
         e.preventDefault()
+        getBrowserFingerprint()
         setMarkAttendanceLoading(true)
         await getLocation()
         await getIPv4()
@@ -218,6 +221,8 @@ export const MarkAttendancePage = (props) => {
             <p>Longitude: {userLongitude}</p>
             <p>IPv4 Address: {userIPv4}</p>
             <p>Unique Device ID: {browserFingerprint}</p>
+            <br/>
+            <br/>
             <br/>
             <br/>
             <br/>
