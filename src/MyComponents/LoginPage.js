@@ -119,10 +119,10 @@ export const LoginPage = (props) => {
                 console.log(result)
                 if (result.data.status === "User registered successfully!") {
                     success_notification("User Registered! Redirecting to login page")
+                    setDisableRegisterButton(true)
                     setTimeout(() => {
                         setJustifyActive("LoginPage")
-                        setDisableRegisterButton(true)
-                    }, 4000)
+                    }, 2500)
                 } else if (result.data.status === "User already registered!") {
                     warn_notification(result.data.status)
                 }
