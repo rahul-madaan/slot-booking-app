@@ -90,8 +90,11 @@ export const MarkAttendancePage = (props) => {
                 warn_notification("Email field is empty")
             }
             if (result.data.status === "No slot booked yet") {
-                warn_notification("You have not booked any slot yet!")
+                warn_notification("You have not booked any slot yet! Redirecting...")
                 setMarkAttendanceDisabled(true)
+                setTimeout(() => {
+                    routeChange("/select-days")
+                }, 2500)
             } else if (result.data.status === "Fetched booked slot details successfully!") {
                 props.setSelectedSlotNumber(result.data.slot_number)
                 props.setSelectedDaysCode(result.data.days_code)
