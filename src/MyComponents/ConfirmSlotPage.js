@@ -46,13 +46,13 @@ export const ConfirmSlotPage = (props) => {
             if (result.data.status === "Booked slot successfully") {
                 setTimeout(() => {
                     routeChange("/mark-attendance")
-                }, 3500)
+                }, 2500)
                 success_notification("Booked slot successfully! Redirecting...")
                 setDisabledConfirm(true)
             } else if (result.data.status === "15 minutes expired, book another slot") {
                 setTimeout(() => {
                     routeChange("/select-days")
-                }, 3500)
+                }, 2500)
                 warn_notification("15 minutes expired, book another slot. redirecting...")
             }
         }).catch(error => {
