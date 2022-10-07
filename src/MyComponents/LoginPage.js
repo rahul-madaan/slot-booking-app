@@ -12,6 +12,7 @@ import {
 }
     from 'mdb-react-ui-kit';
 import {toast} from "react-toastify";
+import GoogleAd from "./GoogleAd";
 
 
 export const LoginPage = (props) => {
@@ -164,6 +165,7 @@ export const LoginPage = (props) => {
 
     return (
         <>
+            <GoogleAd slot="989038934" classNames="page-top" />
             <MDBContainer className="p-3 my-3 d-flex flex-column w-75">
 
                 <MDBTabs pills justify className='mb-3 d-flex flex-row justify-content-between'>
@@ -261,6 +263,7 @@ export const LoginPage = (props) => {
                 </MDBTabsContent>
 
             </MDBContainer>
+            <GoogleAd slot="989038935" classNames="page-bottom" />
         </>
 
     )
