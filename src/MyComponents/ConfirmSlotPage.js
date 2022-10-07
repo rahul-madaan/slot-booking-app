@@ -8,6 +8,7 @@ import {toast} from "react-toastify";
 export const ConfirmSlotPage = (props) => {
 
     const [checked, setChecked] = useState(false)
+    const [disabledConfirm, setDisabledConfirm] = useState(false)
 
 
     let navigate = useNavigate();
@@ -43,11 +44,16 @@ export const ConfirmSlotPage = (props) => {
             "slot_number": props.selectedSlotNumber
         }).then((result) => {
             if (result.data.status === "Booked slot successfully") {
-                routeChange("/mark-attendance")
-                success_notification("Booked slot successfully!")
+                setTimeout(() => {
+                    routeChange("/mark-attendance")
+                }, 3500)
+                success_notification("Booked slot successfully! Redirecting...")
+                setDisabledConfirm(true)
             } else if (result.data.status === "15 minutes expired, book another slot") {
-                warn_notification("15 minutes expired, book another slot")
-                routeChange("/select-days")
+                setTimeout(() => {
+                    routeChange("/select-days")
+                }, 3500)
+                warn_notification("15 minutes expired, book another slot. redirecting...")
             }
         }).catch(error => {
             console.log(error.response)
@@ -128,7 +134,12 @@ export const ConfirmSlotPage = (props) => {
                 <li className="list-group-item">Email: {props.userSNUID}</li>
             </ul>
             <div className="container h-100 d-flex justify-content-center">
-                    <button type="button" className="btn btn-success my-3" onClick={clickConfirm} disabled={!checked}>CONFIRM SLOT</button>
+                {disabledConfirm
+                    ?
+                    <button type="button" className="btn btn-success my-3" onClick={clickConfirm} disabled={true}>CONFIRM SLOT</button>
+                :
+                    <button type="button" className="btn btn-success my-3" onClick={clickConfirm} disabled={!checked && !disabledConfirm}>CONFIRM SLOT</button>
+                }
                 <br/>
                 <br/>
             </div>
