@@ -120,6 +120,13 @@ export const MarkAttendancePage = (props) => {
         }
     }, [userSNUID]);
 
+    useEffect(() => {
+        if (userLongitude === 0 || userLatitude === 0) {
+        } else {
+            check_location()
+        }
+    }, [userLongitude,userLongitude]);
+
 
     let navigate = useNavigate();
     const routeChange = (path) => {
@@ -131,6 +138,13 @@ export const MarkAttendancePage = (props) => {
         console.log(res.data);
         setUserIPv4(res.data.IPv4)
         success_notification('IPv4 Collected successfully')
+    }
+
+    const check_location = () => {
+        axios.get(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/check-location/?latitude=" + userLatitude + "&longitude=" + userLongitude).then((result) => {
+            console.log(result.data);
+            success_notification(result.data.status)
+        })
     }
 
 
