@@ -60,9 +60,15 @@ export const SlotButton = (props) => {
 
 
     return (
-        <>
-            <button type="button" className="btn btn-outline-success" onClick={clickBookSlot} data-value-slot-name={props.value} data-value-index-number={props.value2} disabled={props.availableSlotCount <= 0} > Book Slot
+        <>{props.availableSlotCount <= 0
+            ?
+            <button type="button" className="btn btn-outline-danger" disabled={true} > Book Slot
             </button>
+            :
+            <button type="button" className="btn btn-success" onClick={clickBookSlot} data-value-slot-name={props.value} data-value-index-number={props.value2} disabled={props.availableSlotCount <= 0} > Book Slot
+            </button>
+        }
+
         </>
     )
 }
