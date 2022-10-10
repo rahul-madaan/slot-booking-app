@@ -18,6 +18,8 @@ export const MarkAttendancePage = (props) => {
     const [userSNUID, setUserSNUID] = useState("")
     const [browserFingerprint, setBrowserFingerprint] = useState("")
     const [startDate, setStartDate] = useState("")
+    const [locationCheck, setLocationCheck] = useState(true)
+    const [cantMarkAttendanceReason, setCantMarkAttendanceReason] = useState("")
 
     const getBrowserFingerprint = () => {
         getCurrentBrowserFingerPrint().then((fingerprint) => {
@@ -137,14 +139,28 @@ export const MarkAttendancePage = (props) => {
         const res = await axios.get('https://geolocation-db.com/json/')
         console.log(res.data);
         setUserIPv4(res.data.IPv4)
-        success_notification('IPv4 Collected successfully')
+        success_notification('IP Address collected successfully')
     }
 
     const check_location = () => {
         axios.get(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/check-location/?latitude=" + userLatitude + "&longitude=" + userLongitude).then((result) => {
-            console.log(result.data);
-            success_notification(result.data.status)
+            if(result.data.status === "OUTSIDE_GYM"){
+                setCantMarkAttendanceReason("Please mark attendance from inside the Gym!")
+                setLocationCheck(false)
+                warn_notification("Location not inside GYM!")
+            }else if(result.data.status === "LOCATION_NOT_CORRECT"){
+                setCantMarkAttendanceReason("Cannot fetch your location")
+                setLocationCheck(false)
+                warn_notification("Cannot fetch your location!")
+            }else if(result.data.status === "INSIDE_GYM"){
+                setCantMarkAttendanceReason("")
+                setLocationCheck(true)
+            }
         })
+    }
+
+    const checkBrowserFingerprint = () => {
+
     }
 
 

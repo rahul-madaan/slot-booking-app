@@ -13,3 +13,4 @@ make 404 page https://www.geeksforgeeks.org/how-to-setup-404-page-in-react-routi
 make forget password page
 make user profile page and icon in top left
 make logout button in top right
+instead of notifications of collected, show on page, tick cross not collected
