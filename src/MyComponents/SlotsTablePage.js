@@ -2,6 +2,8 @@ import axios from "axios";
 import {useEffect, useLayoutEffect, useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
 import {useNavigate} from "react-router-dom";
+import GoogleAd from "./GoogleAd";
+import React from "@types/react";
 
 
 export const SlotsTablePage = (props) => {
@@ -78,6 +80,7 @@ export const SlotsTablePage = (props) => {
 
     return (
         <>
+            <GoogleAd slot="989221934" classNames="page-top" />
             <table className="table">
                 <thead>
                 <tr>
@@ -102,6 +105,7 @@ export const SlotsTablePage = (props) => {
                 })}
                 </tbody>
             </table>
+            <GoogleAd slot="9892132314" classNames="page-bottom" />
         </>
     )
 }

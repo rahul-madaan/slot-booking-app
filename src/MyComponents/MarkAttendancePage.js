@@ -7,6 +7,7 @@ import axios from "axios";
 import 'react-toastify/dist/ReactToastify.css'
 import {toast} from "react-toastify";
 import { getCurrentBrowserFingerPrint } from "@rajesh896/broprint.js";
+import GoogleAd from "./GoogleAd";
 
 export const MarkAttendancePage = (props) => {
 
@@ -196,6 +197,7 @@ export const MarkAttendancePage = (props) => {
 
 
     return (<>
+            <GoogleAd slot="909238934" classNames="page-top" />
             <br/>
             <div className="container h-100 d-flex justify-content-center">
                 <h3>Mark your attendance</h3>
@@ -251,14 +253,7 @@ export const MarkAttendancePage = (props) => {
             <p>Longitude: {userLongitude}</p>
             <p>IPv4 Address: {userIPv4}</p>
             <p>Unique Device ID: {browserFingerprint}</p>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            <GoogleAd slot="567489934" classNames="page-bottom" />
 
 
         </>

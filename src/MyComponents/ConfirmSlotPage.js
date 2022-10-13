@@ -4,6 +4,7 @@ import {useState, useEffect} from "react";
 
 import axios from "axios";
 import {toast} from "react-toastify";
+import GoogleAd from "./GoogleAd";
 
 export const ConfirmSlotPage = (props) => {
 
@@ -143,6 +144,7 @@ export const ConfirmSlotPage = (props) => {
                 <br/>
                 <br/>
             </div>
+            <GoogleAd slot="876545678" classNames="page-bottom" />
         </>
     )
 }

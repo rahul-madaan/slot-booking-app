@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {useState, useEffect} from "react";
 
 import axios from "axios";
+import GoogleAd from "./GoogleAd";
 
 export const SelectDaysPage = (props) => {
 
@@ -66,7 +67,7 @@ export const SelectDaysPage = (props) => {
 
 
     return (<>
-            <p></p>
+            <GoogleAd slot="98903887532" classNames="page-top" />
             <br/>
             <br/>
             <div className="container h-100 d-flex justify-content-center">
@@ -88,6 +89,7 @@ export const SelectDaysPage = (props) => {
             <div className="container h-100 d-flex justify-content-center ">
                 <button type="button" className="btn btn-success btn-lg my-3 mx-3" onClick={clickConfirmSelection} disabled={props.confirmSelectionDisabled}>Confirm Selection</button>
             </div>
+            <GoogleAd slot="989238934" classNames="page-bottom" />
         </>
     )
 }
