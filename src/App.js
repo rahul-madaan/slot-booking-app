@@ -34,7 +34,7 @@ function App() {
                                           setLoginPassword={setLoginPassword}/></>}/>
 
                     <Route exact path="/book-slot"
-                           element={<><h3>Select Your Gym Slot</h3>
+                           element={<>
                                <SlotsTablePage timeSlots={timeSlots}
                                                userSNUID={userSNUID}
                                                setUserSNUID={setUserSNUID}
@@ -91,7 +91,7 @@ function App() {
                                /></>}/>
 
 
-                    <Route exact path="/" element={<Navigate to="/login"/>}/>
+                    <Route exact path="/" element={<Navigate to="/select-days"/>}/>
                 </Routes>
             </Router>
             <ToastContainer/>

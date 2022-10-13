@@ -3,6 +3,7 @@ import {useEffect, useLayoutEffect, useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
 import {useNavigate} from "react-router-dom";
 import GoogleAd from "./GoogleAd";
+import React from "react";
 
 
 export const SlotsTablePage = (props) => {
@@ -30,7 +31,7 @@ export const SlotsTablePage = (props) => {
             console.log(result.data.loginSuccess)
             if (result.data.loginSuccess === 0) {
                 console.log("cant verify email, login again")
-                routeChange('/login')
+                routeChange('/select-days')
                 localStorage.removeItem("user_emailID")
                 localStorage.removeItem("user_emailID_len")
             } else if (result.data.loginSuccess === 1) {
@@ -40,7 +41,7 @@ export const SlotsTablePage = (props) => {
             }
         }).catch(error => {
             console.log(error.response)
-            routeChange('/login')
+            routeChange('/select-days')
         })
     }
 
@@ -79,6 +80,9 @@ export const SlotsTablePage = (props) => {
 
     return (
         <>
+            <div className="container h-100 d-flex justify-content-center">
+                <h3>Select Your Gym Slot</h3>
+            </div>
             <GoogleAd slot="989221934" classNames="page-top" />
             <table className="table">
                 <thead>

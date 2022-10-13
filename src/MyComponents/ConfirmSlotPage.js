@@ -72,7 +72,7 @@ export const ConfirmSlotPage = (props) => {
             console.log(result.data.loginSuccess)
             if (result.data.loginSuccess === 0) {
                 console.log("cant verify email, login again")
-                routeChange('/login')
+                routeChange('/select-days')
                 localStorage.removeItem("user_emailID")
                 localStorage.removeItem("user_emailID_len")
             } else if (result.data.loginSuccess === 1) {
@@ -82,6 +82,7 @@ export const ConfirmSlotPage = (props) => {
             }
         }).catch(error => {
             console.log(error.response)
+            routeChange("/select-days")
         })
     }
 

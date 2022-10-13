@@ -38,6 +38,7 @@ export const SelectDaysPage = (props) => {
 
     const verifyLogin = () => {
         console.log("login verify started")
+        console.log(localStorage.getItem(""))
         axios.post(process.env.REACT_APP_API_URI + process.env.REACT_APP_API_VERSION + "/verify-login", {
             'encrypted_email_ID': localStorage.getItem("user_emailID"),
             'encrypted_email_ID_len': localStorage.getItem("user_emailID_len")
@@ -46,7 +47,7 @@ export const SelectDaysPage = (props) => {
             console.log(result.data.loginSuccess)
             if (result.data.loginSuccess === 0) {
                 console.log("cant verify email, login again")
-                routeChange('/login')
+                routeChange('/select-days')
                 localStorage.removeItem("user_emailID")
                 localStorage.removeItem("user_emailID_len")
             } else if (result.data.loginSuccess === 1) {
@@ -56,13 +57,20 @@ export const SelectDaysPage = (props) => {
             }
         }).catch(error => {
             console.log(error.response)
-            routeChange('/login')
+            routeChange('/select-days')
+        })
+    }
+    function dummyLogin(){
+        return new Promise ((resolve, reject)=>{
+            localStorage.setItem("user_emailID","uk82ezw95pt6bfgzgnk43p788qe0t7o9pea4o0nxr4jkzwtvl8xzupqwtvl8ycbpnv2epa787x5x6iqar4rffxmdunvhnzvkt7rl0z9bk")
+            localStorage.setItem("user_emailID_len","4h2lv2hg0y")
+            resolve()
         })
     }
 
 
     useEffect(() => {
-        verifyLogin()
+        dummyLogin().then(verifyLogin())
     }, []);
 
 
