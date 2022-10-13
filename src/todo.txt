@@ -15,3 +15,4 @@ make user profile page and icon in top left
 make logout button in top right
 instead of notifications of collected, show on page, tick cross not collected
 divide slot table page in 2 parts, morning slots, evening slots, for more ads.
+remove unwanted local storage items on loading mark attendance page
