@@ -3,7 +3,6 @@ import {useEffect, useLayoutEffect, useState} from "react";
 import {SlotsTableContent} from "./SlotsTableContent";
 import {useNavigate} from "react-router-dom";
 import GoogleAd from "./GoogleAd";
-import React from "@types/react";
 
 
 export const SlotsTablePage = (props) => {
