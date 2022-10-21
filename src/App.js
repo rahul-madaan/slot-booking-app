@@ -9,6 +9,7 @@ import {ConfirmSlotPage} from "./MyComponents/ConfirmSlotPage";
 import 'react-toastify/dist/ReactToastify.css'
 import {toast, ToastContainer} from "react-toastify";
 import GoogleAd from "./MyComponents/GoogleAd";
+import {Navbar} from "./MyComponents/Navbar";
 
 const timeSlots = ["6:00-6:45 AM", "7:00-7:45 AM", "8:00-8:45 AM", "4:00-4:45 PM", "5:00-5:45 PM", "6:00-6:45 PM", "7:00-7:45 PM", "8:00-8:45 PM"];
 
@@ -27,7 +28,7 @@ function App() {
             <Router>
                 <Routes>
                     <Route exact path="/login"
-                           element={<>
+                           element={<><Navbar/>
                                <LoginPage userSNUID={userSNUID}
                                           setUserSNUID={setUserSNUID}
                                           loginPassword={loginPassword}
