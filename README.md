@@ -62,6 +62,3 @@ https://user-images.githubusercontent.com/34760210/216679020-84dd8e3f-f443-4907-
 
 
 
-="https://user-images.githubusercontent.com/34760210/171961111-4cb24bc1-5f33-446d-8aec-20f1ff8e82af.png">
-
-
