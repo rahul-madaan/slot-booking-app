@@ -35,7 +35,8 @@ This app was created and hosted on AWS for Gym at Shiv Nadar University to repla
 <img width="1611" alt="Screenshot 2023-02-03 at 11 50 10 PM" src="https://user-images.githubusercontent.com/34760210/216678028-3c3677ac-cf2c-4194-8420-e04249d848b0.png">
 
 ## Select your gym days
-https://user-images.githubusercontent.com/34760210/216678637-8f6e3afd-ddc9-46a1-b285-0c1417c90d51.mov
+https://user-images.githubusercontent.com/34760210/216679020-84dd8e3f-f443-4907-a914-e77d8f6989a9.mov
+
 
 
 
