@@ -1,6 +1,6 @@
-# IDmyPhone
-ReactJS based Web Application to link all the Digital Devices with Aadhaar Number of individuals and enable transfer of devices and reporting of
-lost/stolen devices to stop trading of stolen phones and reduce crime.
+# GYM Slot Booking Web app
+ReactJS based Web Application to book slots for Gym.
+This app was created and hosted on AWS for Gym at Shiv Nadar University to replace manual booking every sunday
 
 # Tech Stack
 - FrontEnd: ReactJS
@@ -24,15 +24,20 @@ lost/stolen devices to stop trading of stolen phones and reduce crime.
 12. Open http://localhost:3000/ on your browser.
 
 # Database UML Diagram
-![image](https://user-images.githubusercontent.com/34760210/171046512-bfbc6818-7a1b-4e2c-b227-3241c7ca86c7.png)
+![slot_app_db](https://user-images.githubusercontent.com/34760210/216677500-6e47ef69-a8b6-45bc-bdc0-c6095cab027a.png)
 
 
 # User Interface
-## Register Page
-<img width="1439" alt="Screenshot 2022-05-31 at 12 11 37 AM" src="https://user-images.githubusercontent.com/34760210/171046116-336c506f-394d-42a4-966c-c52d5c70dfdc.png">
+## Login Page
+<img width="1616" alt="Screenshot 2023-02-03 at 11 49 35 PM" src="https://user-images.githubusercontent.com/34760210/216677944-d79fa220-e91c-434e-9727-e5830c9fe1da.png">
 
-## Home Page
-<img width="1440" alt="Screenshot 2022-05-31 at 12 06 22 AM (2)" src="https://user-images.githubusercontent.com/34760210/171045649-bfec41a6-f367-4675-858f-eb548ba27aca.png">
+## Register Page
+<img width="1611" alt="Screenshot 2023-02-03 at 11 50 10 PM" src="https://user-images.githubusercontent.com/34760210/216678028-3c3677ac-cf2c-4194-8420-e04249d848b0.png">
+
+## Select your gym days
+https://user-images.githubusercontent.com/34760210/216678637-8f6e3afd-ddc9-46a1-b285-0c1417c90d51.mov
+
+
 
 ## Transfer Requests Page
 <img width="1438" alt="Screenshot 2022-05-31 at 12 08 47 AM" src="https://user-images.githubusercontent.com/34760210/171045853-31f58c11-c495-45e0-a462-fd8711950443.png">
