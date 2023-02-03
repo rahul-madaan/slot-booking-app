@@ -6,6 +6,7 @@ This app was created and hosted on AWS for Gym at Shiv Nadar University to repla
 - FrontEnd: ReactJS
 - BackEnd: Python FastAPI https://github.com/rahul-madaan/phone-one-server
 - Database: MySQL
+- Hosting: AWS Amplify
 
 # Features
 - Users can book a slot for 1 week 
